@@ -39,9 +39,8 @@ export default class QuantseqPlugin extends Plugin {
     )
 
     pluginManager.addDisplayType(() => {
-      const configSchema = QuantitativeSequenceDisplayConfigSchemaFactory(
-        pluginManager,
-      )
+      const configSchema =
+        QuantitativeSequenceDisplayConfigSchemaFactory(pluginManager)
       return new DisplayType({
         name: 'QuantitativeSequenceDisplay',
         configSchema,
@@ -58,9 +57,8 @@ export default class QuantseqPlugin extends Plugin {
     pluginManager.addRendererType(() => {
       //@ts-ignore
       const QuantitativeSequenceRenderer = new rendererFactory(pluginManager)
-      const configSchema = QuantitativeSequenceRendererConfigSchemaFactory(
-        pluginManager,
-      )
+      const configSchema =
+        QuantitativeSequenceRendererConfigSchemaFactory(pluginManager)
       return new QuantitativeSequenceRenderer({
         name: 'QuantitativeSequenceRenderer',
         ReactComponent: XYPlotRendererReactComponent,

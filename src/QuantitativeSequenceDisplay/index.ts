@@ -2,9 +2,8 @@ import PluginManager from '@jbrowse/core/PluginManager'
 
 export function configSchemaFactory(pluginManager: PluginManager) {
   const { types } = pluginManager.lib['mobx-state-tree']
-  const { ConfigurationSchema } = pluginManager.lib[
-    '@jbrowse/core/configuration'
-  ]
+  const { ConfigurationSchema } =
+    pluginManager.lib['@jbrowse/core/configuration']
 
   const LGVPlugin = pluginManager.getPlugin(
     'LinearGenomeViewPlugin',
