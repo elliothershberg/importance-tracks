@@ -19,43 +19,27 @@ export default function rendererFactory(pluginManager: PluginManager) {
       const {
         features,
         regions,
-        bpPerPx,
-        scaleOpts,
-        height: unadjustedHeight,
-        displayCrossHatches,
-        ticks: { values },
-      } = props
-      const [region] = regions
-      const YSCALEBAR_LABEL_OFFSET = 5
-      const height = unadjustedHeight - YSCALEBAR_LABEL_OFFSET * 2
-      const opts = { ...scaleOpts, range: [0, height] }
-      const width = (region.end - region.start) / bpPerPx
-      const originY = getOrigin(scaleOpts.scaleType)
-      const scale = getScale(opts)
-
-      if (region.end - region.start > 5000) {
-        console.log('using super')
-        super.draw(ctx, props)
-        return
-      }
-
-      const toY = (n: number) => height - scale(n) + YSCALEBAR_LABEL_OFFSET
-      const toHeight = (n: number) => toY(originY) - toY(n)
-
-      console.log({ features })
-      ctx.textAlign = 'center'
-      for (const feature of features.values()) {
-        const [leftPx, rightPx] = featureSpanPx(feature, region, bpPerPx)
+        bpPerPxhtPx] = featureSpanPx(feature, region, bpPerPx)
         const w = rightPx - leftPx + 0.4 // fudge factor for subpixel rendering
         const score = feature.get('score') as number
         const base = feature.get('base')
         ctx.fillStyle = getColor(base)
-        ctx.fillRect(leftPx, toY(score), w, toHeight(score))
-        ctx.fillStyle = '#000'
-        if (1 / bpPerPx > 5) {
-          ctx.fillText(base, leftPx + (rightPx - leftPx) / 2, toY(score) - 2)
+        if (1 / bpPerPx < 10) {
+          ctx.fillRect(leftPx, toY(score), w, toHeight(score))
+        } else {
+          ctx.setTransform(
+            w / 10,
+            0,
+            0,
+            toHeight(score) / 4,
+            leftPx * 2 + (rightPx - leftPx),
+            height + toY(0) / 2 + YSCALEBAR_LABEL_OFFSET,
+          )
+
+          ctx.fillText(base, 0, 0)
         }
       }
+      ctx.resetTransform()
 
       if (displayCrossHatches) {
         ctx.lineWidth = 1

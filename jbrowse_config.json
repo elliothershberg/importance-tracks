@@ -62,6 +62,42 @@
           "type": "QuantitativeSequenceDisplay"
         }
       ]
+    },
+    {
+      "type": "QuantitativeTrack",
+      "trackId": "bias_neuron_Pou4_FoxL2_2.profile_scores.bw",
+      "name": "bias_neuron_Pou4_FoxL2_2.profile_scores",
+      "assemblyNames": ["hg38"],
+      "adapter": {
+        "type": "QuantitativeSequenceAdapter",
+        "wiggleAdapter": {
+          "type": "BigWigAdapter",
+          "bigWigLocation": {
+            "uri": "bias_neuron_Pou4_FoxL2_2.profile_scores.bw",
+            "locationType": "UriLocation",
+            "baseUri": "https://sebelab.crg.eu/Nvec-vc1.1-jb2/config.json"
+          }
+        },
+        "sequenceAdapter": {
+          "type": "IndexedFastaAdapter",
+          "fastaLocation": {
+            "uri": "Nvec_vc1.1_gDNA_mtDNA.fasta",
+            "locationType": "UriLocation",
+            "baseUri": "https://sebelab.crg.eu/Nvec-vc1.1-jb2/config.json"
+          },
+          "faiLocation": {
+            "uri": "Nvec_vc1.1_gDNA_mtDNA.fasta.fai",
+            "locationType": "UriLocation",
+            "baseUri": "https://sebelab.crg.eu/Nvec-vc1.1-jb2/config.json"
+          }
+        }
+      },
+      "displays": [
+        {
+          "displayId": "QuantitativeSequence_display2",
+          "type": "QuantitativeSequenceDisplay"
+        }
+      ]
     }
   ],
   "plugins": [
